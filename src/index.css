@@ -1,11 +1,14 @@
 :root {
-  --container-bgclr: rgb(249, 249, 249);
-  --votes-container-bgclr: rgb(255, 255, 255);
-  --votes-container-brdrclr: rgb(205, 203, 203);
-  --default-icon-clr: rgb(52, 58, 64);
-  --default-icon-bgclr: rgb(244, 246, 248);
-  --selected-icon-clr: rgb(37, 60, 242);
-  --selected-icon-bgclr: rgb(229, 232, 253);
+  --container-bgclr: #f9f9f9;
+  --votes-container-bgclr: #ffffff;
+  --votes-container-brdrclr: #cdcbcb;
+  --default-icon-clr: #343a40;
+  --default-icon-hvr: #f0f1f1;
+  --selected-icon-hvr: #daddf8;
+  --default-icon-bgclr: #f4f6f8;
+  --selected-icon-clr: #253cf2;
+  --selected-icon-bgclr: #e5e8fd;
+  --common-box-shadowclr: #0000001a;
 }
 
 body {
