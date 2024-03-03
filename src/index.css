@@ -1,6 +1,16 @@
 :root {
-  --default-icon-clr: #343a40;
-  --default-icon-bgclr: #f4f6f8;
-  --selected-icon-clr: #253cf2;
-  --selected-icon-bgclr: #e5e8fd;
+  --container-bgclr: rgb(249, 249, 249);
+  --votes-container-bgclr: rgb(255, 255, 255);
+  --votes-container-brdrclr: rgb(205, 203, 203);
+  --default-icon-clr: rgb(52, 58, 64);
+  --default-icon-bgclr: rgb(244, 246, 248);
+  --selected-icon-clr: rgb(37, 60, 242);
+  --selected-icon-bgclr: rgb(229, 232, 253);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
