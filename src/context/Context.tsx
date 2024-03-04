@@ -1,11 +1,32 @@
 import { FC, ReactNode, createContext, useState } from 'react'
 
-const defaultContextValues = {
-  voteGroups: 2,
-  addVoteGroups: () => {},
+type StorageProps = {
+  // localstorage holds selected prop as string, so adding here to avoid warnings
+  selected: boolean | string
+  voteCounter: number
+  [key: string]: string | boolean | number
 }
 
-const AppContext = createContext(defaultContextValues)
+type AppContextProps = {
+  voteGroups: number
+  addVoteGroups: () => void
+  setStorage: (voteID: number, state: StorageProps) => void
+  getStorage: (voteID: number) => StorageProps
+  updateStorage: (voteID: number, state: string, val: string | number) => void
+}
+
+const initialState = {
+  selected: false,
+  voteCounter: 1,
+}
+
+const AppContext = createContext<AppContextProps>({
+  voteGroups: 2,
+  addVoteGroups: () => {},
+  setStorage: () => {},
+  getStorage: () => initialState,
+  updateStorage: () => {},
+})
 
 const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [voteGroups, setVoteGroups] = useState(2)
@@ -14,8 +35,49 @@ const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setVoteGroups((cntr) => cntr + 1)
   }
 
+  // localStorage utilities
+  const setStorage = (voteID: number, state: StorageProps) => {
+    console.log('The new state is', state)
+    localStorage.setItem(`${voteID}`, JSON.stringify(state))
+  }
+
+  const getStorage = (voteID: number): StorageProps => {
+    const storedState = localStorage.getItem(`${voteID}`)
+    if (storedState) {
+      const result: StorageProps = JSON.parse(storedState)
+
+      // Typecasting to specific types
+      result.voteCounter = Number(result.voteCounter)
+      result.selected = result.selected === 'true'
+      return result
+    }
+    return initialState
+  }
+
+  const updateStorage = (
+    voteID: number,
+    state: string,
+    val: string | number
+  ) => {
+    const currentStorage = getStorage(voteID)
+    const newStorage = {
+      ...currentStorage,
+      [state]: val,
+    }
+    newStorage.selected = `${newStorage.selected}`
+    setStorage(voteID, newStorage)
+  }
+
   return (
-    <AppContext.Provider value={{ voteGroups, addVoteGroups }}>
+    <AppContext.Provider
+      value={{
+        voteGroups,
+        addVoteGroups,
+        setStorage,
+        getStorage,
+        updateStorage,
+      }}
+    >
       {children}
     </AppContext.Provider>
   )
