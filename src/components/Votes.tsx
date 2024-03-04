@@ -5,20 +5,26 @@ import useGlobalContext from '../context/useGlobalContext'
 function Votes({ voteID }: { voteID: number }) {
   // These state values are related to this component and not global, hence haven't defined them in useGlobalContext
 
-  const { getStorage, updateStorage } = useGlobalContext()
-  const [selected, setSelected] = useState(getStorage(voteID).selected)
-  const [voteCounter, setVoteCounter] = useState(getStorage(voteID).voteCounter)
-
+  const { getVote, updateVote } = useGlobalContext()
+  const [selected, setSelected] = useState(getVote(voteID)?.selected || false)
+  const [voteCounter, setVoteCounter] = useState(
+    getVote(voteID)?.voteCount || 1
+  )
   const selectHandler = () => {
     setSelected((prev) => {
-      updateStorage(voteID, 'selected', `${!prev}`)
+      // updateStorage(voteID, 'selected', `${!prev}`)
+      updateVote(voteID, {
+        selected: !prev,
+      })
       return !prev
     })
   }
 
   const incrementCounter = () => {
     setVoteCounter((cntr) => {
-      updateStorage(voteID, 'voteCounter', cntr + 1)
+      updateVote(voteID, {
+        voteCount: cntr + 1,
+      })
       return cntr + 1
     })
   }
