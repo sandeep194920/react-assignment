@@ -35,14 +35,16 @@ const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setVoteGroups((cntr) => cntr + 1)
   }
 
-  // localStorage utilities
+  /* localStorage utilities */
+
   const setStorage = (voteID: number, state: StorageProps) => {
     console.log('The new state is', state)
     localStorage.setItem(`${voteID}`, JSON.stringify(state))
   }
 
-  const getStorage = (voteID: number): StorageProps => {
-    const storedState = localStorage.getItem(`${voteID}`)
+  // this method parses all the values and makes it usable in the app
+  const getStorage = (voteID: number) => {
+    const storedState = localStorage.getItem(`${voteID}` || `{}`)
     if (storedState) {
       const result: StorageProps = JSON.parse(storedState)
 
@@ -54,17 +56,22 @@ const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
     return initialState
   }
 
+  // this method gives local storage as it is without parsing the keys.
+  // we need this to update the storage
+  const getStorageForUpdate = (voteID: number) => {
+    return JSON.parse(localStorage.getItem(`${voteID}`) || `{}`)
+  }
+
   const updateStorage = (
     voteID: number,
     state: string,
     val: string | number
   ) => {
-    const currentStorage = getStorage(voteID)
+    const currentStorage = getStorageForUpdate(voteID)
     const newStorage = {
       ...currentStorage,
       [state]: val,
     }
-    newStorage.selected = `${newStorage.selected}`
     setStorage(voteID, newStorage)
   }
 
