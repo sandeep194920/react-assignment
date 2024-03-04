@@ -73,6 +73,11 @@ class LocalStorage {
     return this.#getStore().voteGroups
   }
 
+  resetStore() {
+    this.#updateStore(initialStore)
+    window.location.reload()
+  }
+
   // Private methods
 
   #getStore(): StoreType {
@@ -82,7 +87,6 @@ class LocalStorage {
   }
 
   #updateStore(store: StoreType) {
-    console.log('REEACHED HERE')
     localStorage.setItem('localStore', JSON.stringify(store))
   }
 

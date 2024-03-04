@@ -7,6 +7,7 @@ type AppContextType = {
   addVoteGroups: () => void
   getVote: (voteID: number) => VoteRowType
   updateVote: (voteID: number, vote: VoteRowType) => void
+  resetAppState: () => void
 }
 
 const AppContext = createContext<AppContextType>({
@@ -14,6 +15,7 @@ const AppContext = createContext<AppContextType>({
   addVoteGroups: () => {},
   getVote: () => initialStore.votes[0],
   updateVote: () => {},
+  resetAppState: () => {},
 })
 
 const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
@@ -34,6 +36,10 @@ const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
     store.setRow(voteID, vote)
   }
 
+  const resetAppState = () => {
+    store.resetStore()
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -41,6 +47,7 @@ const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
         addVoteGroups,
         getVote,
         updateVote,
+        resetAppState,
       }}
     >
       {children}

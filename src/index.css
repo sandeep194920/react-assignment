@@ -9,6 +9,7 @@
   --selected-icon-clr: #253cf2;
   --selected-icon-bgclr: #e5e8fd;
   --common-box-shadowclr: #0000001a;
+  --border-radius-default: 10px;
 }
 
 body {

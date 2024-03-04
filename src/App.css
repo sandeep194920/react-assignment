@@ -9,7 +9,7 @@
   padding: 3rem 7rem;
   box-shadow: 0 4px 12px var(--common-box-shadowclr);
   border: 5px solid var(--votes-container-brdrclr);
-  border-radius: 10px;
+  border-radius: var(--border-radius-default);
 }
 
 .votes-container {
@@ -17,7 +17,7 @@
   border: 1px solid var(--votes-container-brdrclr);
   min-width: 30rem;
   max-width: fit-content;
-  border-radius: 10px;
+  border-radius: var(--border-radius-default);
   justify-content: flex-start;
   gap: 1.4rem;
   padding: 0.8rem;
@@ -33,7 +33,7 @@
 .icon {
   width: 3rem;
   height: 3rem;
-  border-radius: 10px;
+  border-radius: var(--border-radius-default);
   cursor: pointer;
 }
 
@@ -58,4 +58,10 @@
 
 .icon-selected:hover {
   background-color: var(--selected-icon-hvr);
+}
+
+.reset-btn {
+  padding: 0.4rem 1rem;
+  border-radius: var(--border-radius-default);
+  cursor: pointer;
 }
