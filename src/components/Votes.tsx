@@ -12,7 +12,6 @@ function Votes({ voteID }: { voteID: number }) {
   )
   const selectHandler = () => {
     setSelected((prev) => {
-      // updateStorage(voteID, 'selected', `${!prev}`)
       updateVote(voteID, {
         selected: !prev,
       })

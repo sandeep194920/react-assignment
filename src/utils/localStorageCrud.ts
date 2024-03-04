@@ -6,34 +6,45 @@ export type VoteRowType = {
 }
 
 export type StoreType = {
-  numOfRows: number
+  voteGroups: number
   votes: {
     [voteID: number]: VoteRowType
   }
 }
 
 export const initialStore = {
-  numOfRows: 1,
+  voteGroups: 2,
   votes: {
     0: {
       selected: false,
-      voteCount: 0,
+      voteCount: 1,
+    },
+    1: {
+      selected: false,
+      voteCount: 1,
     },
   },
 }
 
 class LocalStorage {
-  numOfRows
+  voteGroups
   // 2 rows of upvotes to start with
-  constructor(numOfRows: number = 2) {
-    this.numOfRows = numOfRows
+  constructor(voteGroups: number = 2) {
+    this.voteGroups = voteGroups
   }
 
-  setRowCount(numOfRows: number) {
+  addVoteGroup(voteGroups: number) {
     const currentStore = this.#getStore()
     const updatedStore = {
       ...currentStore,
-      numOfRows,
+      votes: {
+        ...currentStore.votes,
+        [voteGroups - 1]: {
+          selected: false,
+          voteCount: 1,
+        },
+      },
+      voteGroups,
     }
     this.#updateStore(updatedStore)
   }
@@ -50,7 +61,6 @@ class LocalStorage {
         },
       },
     }
-    console.log('The updated Store will be', updatedStore)
     this.#updateStore(updatedStore)
   }
 
@@ -59,8 +69,8 @@ class LocalStorage {
     return votes[voteID]
   }
 
-  getRowCount(): number {
-    return this.#getStore().numOfRows
+  getVoteGroups(): number {
+    return this.#getStore().voteGroups
   }
 
   // Private methods
