@@ -9,7 +9,7 @@ function App() {
   return (
     <main className="main-container">
       {[...Array(voteGroups)].map((_, index) => (
-        <Votes key={index} />
+        <Votes key={index} voteID={index} />
       ))}
       {/* This add icon was not part of requirement, but added this so that multiple lists can be tested */}
       <Icon size="small" iconType="plus" onClick={addVoteGroups} />
