@@ -1,5 +1,7 @@
 # React Project (Assignment)
 
+[Please access the deployed site here](https://master--react-assignment-scrawlr.netlify.app/)
+
 ### Coding Approach
 
 - It was fun to code this app.
@@ -31,4 +33,4 @@
 - Vite doesn't come with built-in support for RTL, hence took some time to figure out the configs for test
 - Installed some additional dev packages and added test configs to overcome the challenges
 
-_I hope I've covered all the use cases mentioned in the requirement file. It was really a fun project and thanks for the opportunity. Awaiting for your feedback. Thank you._
+_I hope I've covered all the use cases mentioned in the requirement file. [I have deployed it on Netlify and you can access it here](https://master--react-assignment-scrawlr.netlify.app/). It was really a fun project and thanks for the opportunity. Awaiting for your feedback. Thank you._
